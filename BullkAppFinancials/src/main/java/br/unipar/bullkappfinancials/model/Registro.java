@@ -26,6 +26,9 @@ public class Registro {
     private Usuario usuario;
     @ManyToOne
     private Categoria categoria;
+    @ManyToOne
+    private TipoAcerto tipoAcerto;
+    @Enumerated(EnumType.STRING)
     private TipoContaENUM tipoConta;
 
 }

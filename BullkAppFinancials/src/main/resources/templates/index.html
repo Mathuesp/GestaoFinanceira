@@ -11,6 +11,46 @@
           crossorigin="anonymous" defer></script>
 </head>
 <body>
+
+<div>
+
+    <h2>List of Seed Starters</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date Planted</th>
+                <th>Covered</th>
+                <th>Type</th>
+                <th>Features</th>
+                <th>Rows</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sb : ${allSeedStarters}">
+                <td th:text="${{sb.datePlanted}}">13/01/2011</td>
+                <td th:text="#{|bool.${sb.covered}|}">yes</td>
+                <td th:text="#{|seedstarter.type.${sb.type}|}">Wireframe</td>
+                <td th:text="${#strings.arrayJoin(
+                               #messages.arrayMsg(
+                                   #strings.arrayPrepend(sb.features,'seedstarter.feature.')),
+                               ', ')}">Electric Heating, Turf</td>
+                <td>
+                    <table>
+                        <tbody>
+                        <tr th:each="row,rowStat : ${sb.rows}">
+                            <td th:text="${rowStat.count}">1</td>
+                            <td th:text="${row.variety.name}">Thymus Thymi</td>
+                            <td th:text="${row.seedsPerCell}">12</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
     <ol>
         <li th:each="user : ${users}" th:text="${'Olá mundo, ' + user.getNome() + '.'}"></li>
     </ol>
@@ -31,6 +71,12 @@
             <label for="features3">PH Corrector used</label>
         </li>
     </ul>
-    <input text type="text" th:field="*{users}" />
+    <select th:field="*{users}">
+        <option th:each="type : ${users}"
+                th:value="${type}"
+                th:text="${type.getNome()}"></option>
+    </select>
+
+    <input th:label="'Teste'" type="text" th:field="*{users}" />
 </body>
 </html>
