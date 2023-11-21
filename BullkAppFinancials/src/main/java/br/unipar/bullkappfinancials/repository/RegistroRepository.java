@@ -14,4 +14,7 @@ import java.util.List;
 public interface RegistroRepository extends JpaRepository<Registro, Long> {
     @Query
     public List<Registro> findByDescricao(String descricao);
+
+    @Query
+    public List<Registro> findByOrderByDataCompraDesc();
 }
