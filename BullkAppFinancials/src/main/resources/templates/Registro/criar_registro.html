@@ -10,19 +10,21 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous" defer></script>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/static">BullkApp Financials</a>
+            <a class="navbar-brand" href="/">BullkApp Financials</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/static">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,19 +54,27 @@
             </div>
             <div class="row">
                 <form class="row g-3" method="POST" action="/registro" th:object="${registro}">
+                    <div class="mb-3">
+                        <label for="id" class="form-label">Código</label>
+                        <input id="id"
+                               type="text"
+                               readonly
+                               class="form-control-plaintext"
+                               name="id"
+                               th:value="${registro.id}">
+                    </div>
                     <div class="col-md-4">
-                        <label for="data_compra" class="form-label">Data Compra</label>
-                        <input placeholder="Select date"
-                               type="date"
-                               name="data_compra"
-                               id="data_compra"
+                        <label for="dataCompra" class="form-label">Data Compra</label>
+                        <input type="date"
+                               name="dataCompra"
+                               id="dataCompra"
                                class="form-control"
                                th:value="${registro.dataCompra}"
                                required>
                     </div>
                     <div class="col-md-4">
                         <label for="dataVencimento" class="form-label">Data Vencimento</label>
-                        <input type="datetime-local"
+                        <input type="date"
                                class="form-control"
                                name="dataVencimento"
                                id="dataVencimento"
@@ -89,14 +99,14 @@
                                th:value="${registro.parcela}"
                                required>
                     </div>
-<!--                    <div class="col-md-4">-->
-<!--                        <label for="tipoConta" class="form-label">Tipo Conta</label>-->
-<!--                        <select class="form-select" id="tipoConta" name="tipoConta" required>-->
-<!--                            <option th:each="type : ${tipoContas}"-->
-<!--                                    th:value="${type}"-->
-<!--                                    th:text="${type}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <div class="col-md-4">
+                        <label for="tipoConta" class="form-label">Tipo Conta</label>
+                        <select class="form-select" id="tipoConta" name="tipoConta" required>
+                            <option th:each="type : ${tipoContas}"
+                                    th:value="${type}"
+                                    th:text="${type}"></option>
+                        </select>
+                    </div>
                     <div class="col-md-4">
                         <label for="valor" class="form-label">Valor</label>
                         <input type="text"
@@ -106,30 +116,30 @@
                                th:value="${registro.valor}"
                                required>
                     </div>
-<!--                    <div class="col-md-4">-->
-<!--                        <label for="categoria" class="form-label">Categoria</label>-->
-<!--                        <select class="form-select" id="categoria" name="categoria" required>-->
-<!--                            <option th:each="type : ${categorias}"-->
-<!--                                    th:value="${type}"-->
-<!--                                    th:text="${type.getDescricao()}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-4">-->
-<!--                        <label for="tipoAcerto" class="form-label">Tipo Acerto</label>-->
-<!--                        <select class="form-select" id="tipoAcerto" name="tipoAcerto" required>-->
-<!--                            <option th:each="type : ${tiposAcerto}"-->
-<!--                                    th:value="${type}"-->
-<!--                                    th:text="${type.getDescricao()}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-4">-->
-<!--                        <label for="usuario" class="form-label">Responsável</label>-->
-<!--                        <select class="form-select" id="usuario" name="usuario" required>-->
-<!--                            <option th:each="type : ${users}"-->
-<!--                                    th:value="${type}"-->
-<!--                                    th:text="${type.getNome()}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <div class="col-md-4">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <select class="form-select" id="categoria" name="categoria" required>
+                            <option th:each="type : ${categorias}"
+                                    th:value="${type.id}"
+                                    th:text="${type.getDescricao()}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="tipoAcerto" class="form-label">Tipo Acerto</label>
+                        <select class="form-select" id="tipoAcerto" name="tipoAcerto" required>
+                            <option th:each="type : ${tiposAcerto}"
+                                    th:value="${type.id}"
+                                    th:text="${type.getDescricao()}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="usuario" class="form-label">Responsável</label>
+                        <select class="form-select" id="usuario" name="usuario" required>
+                            <option th:each="type : ${users}"
+                                    th:value="${type.id}"
+                                    th:text="${type.getNome()}"></option>
+                        </select>
+                    </div>
                     <div class="col-12">
                         <button class="btn btn-success" type="submit">Enviar</button>
                     </div>
@@ -138,5 +148,12 @@
         </div>
     </div>
 </main>
+<!--<script>-->
+    // $(document).ready(function () {
+        // $('#dataVencimento').mask('00/00/0000');
+        // $('#dataCompra').mask('00/00/0000');
+        // $('#valor').mask('R$ 000.000.000,00', { reverse: true });
+    // });
+<!--</script>-->
 </body>
 </html>

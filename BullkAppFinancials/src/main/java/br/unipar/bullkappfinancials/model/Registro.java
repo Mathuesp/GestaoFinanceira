@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,8 +20,10 @@ public class Registro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataCompra;
     @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataVencimento;
     @NonNull
     private String descricao;
