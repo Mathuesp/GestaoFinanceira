@@ -1,6 +1,7 @@
 package br.unipar.bullkappfinancials.controller;
 
 import br.unipar.bullkappfinancials.enums.TipoContaENUM;
+import br.unipar.bullkappfinancials.model.Registro;
 import br.unipar.bullkappfinancials.service.CategoriaService;
 import br.unipar.bullkappfinancials.service.RegistroService;
 import br.unipar.bullkappfinancials.service.TipoAcertoService;
@@ -8,14 +9,18 @@ import br.unipar.bullkappfinancials.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.naming.Binding;
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping(path = "/")
-public class HomeController {
-
+@RequestMapping(path = "/home")
+public class Home2Controller {
     @Autowired
     private UsuarioService usuarioService;
 
@@ -29,12 +34,12 @@ public class HomeController {
     private CategoriaService categoriaService;
 
     @GetMapping
-    public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("totalReceita", registroService.calculaValor(TipoContaENUM.RECEITA));
-        modelAndView.addObject("totalDespesa", registroService.calculaValor(TipoContaENUM.DESPESA));
-        modelAndView.addObject("totalSaldo", registroService.calculaValor(TipoContaENUM.RECEITA) - registroService.calculaValor(TipoContaENUM.DESPESA));
-        modelAndView.addObject("registers", registroService.findAllTop());
-        return modelAndView;
+    public String home(Model model) {
+        model.addAttribute("users", usuarioService.findAll());
+        model.addAttribute("registers", registroService.findAllTop());
+        model.addAttribute("tiposAcerto", tipoAcertoService.findAll());
+        model.addAttribute("categorias", categoriaService.findAll());
+        model.addAttribute("tipoContas", TipoContaENUM.values());
+        return "index";
     }
 }

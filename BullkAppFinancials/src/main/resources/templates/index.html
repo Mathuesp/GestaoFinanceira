@@ -27,6 +27,7 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/cadastro">Cadastros</a>
                   </li>
+                </ul>
               </div>
             </div>
           </nav>
@@ -36,18 +37,14 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <form class="row g-3 needs-validation" novalidate>
+                <form class="row g-3">
                     <div class="col-md-4">
-                        <div class="md-form md-outline input-with-post-icon datepicker">
-                            <label for="dtCompra">Data Compra</label>
+                            <label for="dtCompra" class="form-label">Data Compra</label>
                             <input placeholder="Select date" type="date" id="dtCompra" class="form-control">
-                        </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="md-form md-outline input-with-post-icon datepicker">
-                            <label for="dtVenc">Data Vencimento</label>
+                            <label for="dtVenc" class="form-label">Data Vencimento</label>
                             <input placeholder="Select date" type="date" id="dtVenc" class="form-control">
-                        </div>
                     </div>
                     <div class="col-md-4">
                         <label for="descricao" class="form-label">Descrição</label>
@@ -59,7 +56,11 @@
                     </div>
                     <div class="col-md-4">
                         <label for="tipoConta" class="form-label">Tipo Conta</label>
-                        <input type="text" class="form-control" id="tipoConta" required>
+                        <select class="form-select" id="tipoConta">
+                            <option th:each="type : ${tipoContas}"
+                                    th:value="${type}"
+                                    th:text="${type}"></option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for="valor" class="form-label">Valor</label>
@@ -67,30 +68,31 @@
                     </div>
                     <div class="col-md-4">
                         <label for="categoria" class="form-label">Categoria</label>
-                        <input type="text" class="form-control" id="categoria" required>
+                        <select class="form-select" id="categoria">
+                            <option th:each="type : ${categorias}"
+                                    th:value="${type}"
+                                    th:text="${type.getDescricao()}"></option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for="tipoAcerto" class="form-label">Tipo Acerto</label>
-                        <input type="text" class="form-control" id="tipoAcerto" required>
+                        <select class="form-select" id="tipoAcerto">
+                            <option th:each="type : ${tiposAcerto}"
+                                    th:value="${type}"
+                                    th:text="${type.getDescricao()}"></option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for="responsavel" class="form-label">Responsável</label>
-                        <input type="text" class="form-control" id="responsavel" required>
+                        <select class="form-select" id="responsavel">
+                            <option th:each="type : ${users}"
+                            th:value="${type}"
+                            th:text="${type.getNome()}"></option>
+                        </select>
                     </div>
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                            <label class="form-check-label" for="invalidCheck">
-                                Agree to terms and conditions
-                            </label>
-                            <div class="invalid-feedback">
-                                You must agree before submitting.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Submit form</button>
-                    </div>
+<!--                    <div class="col-12">-->
+<!--                        <button class="btn btn-primary" type="submit">Enviar</button>-->
+<!--                    </div>-->
                 </form>
             </div>
             <div class="row">
@@ -98,39 +100,39 @@
 
                     <h2>List of Seed Starters</h2>
 
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Data Compra</th>
-                            <th>Data Vencimento</th>
-                            <th>Descrição</th>
-                            <th>Parcela</th>
-                            <th>Tipo Conta</th>
-                            <th>Valor</th>
-                            <th>Categoria</th>
-                            <th>Tipo Acerto</th>
-                            <th>Responsável</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="register : ${registers}">
-                            <td th:text="${register.getDataCompra()}"></td>
-                            <td th:text="${register.getDataVencimento()}"></td>
-                            <td th:text="${register.getDescricao()}"></td>
-                            <td th:text="${register.getParcela()}"></td>
-                            <td th:text="${register.getTipoConta()}"></td>
-                            <td th:text="'R$ ' + ${register.getValor()}"></td>
-                            <td th:text="${register.getCategoria().getDescricao()}"></td>
-                            <td th:text="${register.getTipoAcerto().getDescricao()}"></td>
-                            <td th:text="${register.getUsuario().getNome()}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+<!--                    <table>-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Data Compra</th>-->
+<!--                            <th>Data Vencimento</th>-->
+<!--                            <th>Descrição</th>-->
+<!--                            <th>Parcela</th>-->
+<!--                            <th>Tipo Conta</th>-->
+<!--                            <th>Valor</th>-->
+<!--                            <th>Categoria</th>-->
+<!--                            <th>Tipo Acerto</th>-->
+<!--                            <th>Responsável</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr th:each="register : ${registers}">-->
+<!--                            <td th:text="${register.getDataCompra()}"></td>-->
+<!--                            <td th:text="${register.getDataVencimento()}"></td>-->
+<!--                            <td th:text="${register.getDescricao()}"></td>-->
+<!--                            <td th:text="${register.getParcela()}"></td>-->
+<!--                            <td th:text="${register.getTipoConta()}"></td>-->
+<!--                            <td th:text="'R$ ' + ${register.getValor()}"></td>-->
+<!--                            <td th:text="${register.getCategoria().getDescricao()}"></td>-->
+<!--                            <td th:text="${register.getTipoAcerto().getDescricao()}"></td>-->
+<!--                            <td th:text="${register.getUsuario().getNome()}"></td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
                 </div>
             </div>
 
             <ol>
-                <li th:each="user : ${users}" th:text="${'Olá mundo, ' + user.getNome() + '.'}"></li>
+                <li th:each="user : ${users}" th:text="${'Olá ' + user.getNome() + '.'}"></li>
             </ol>
             <ul>
                 <li>
@@ -149,14 +151,6 @@
                     <label for="features3">PH Corrector used</label>
                 </li>
             </ul>
-            <select th:field="*{users}">
-                <option th:each="type : ${users}"
-                        th:value="${type}"
-                        th:text="${type.getNome()}"></option>
-            </select>
-
-            <input th:label="'Teste'" type="text" th:field="*{users}" />
-
         </div>
     </div>
 </body>

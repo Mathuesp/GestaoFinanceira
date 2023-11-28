@@ -1,5 +1,6 @@
 package br.unipar.bullkappfinancials.repository;
 
+import br.unipar.bullkappfinancials.enums.TipoContaENUM;
 import br.unipar.bullkappfinancials.model.Categoria;
 import br.unipar.bullkappfinancials.model.Registro;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,4 +18,7 @@ public interface RegistroRepository extends JpaRepository<Registro, Long> {
 
     @Query
     public List<Registro> findByOrderByDataCompraDesc();
+
+    @Query
+    public List<Registro> findByTipoConta(TipoContaENUM tipoContaENUM);
 }
