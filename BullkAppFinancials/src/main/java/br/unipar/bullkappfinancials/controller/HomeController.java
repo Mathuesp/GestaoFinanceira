@@ -31,9 +31,9 @@ public class HomeController {
     @GetMapping
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("totalReceita", registroService.calculaValor(TipoContaENUM.RECEITA));
-        modelAndView.addObject("totalDespesa", registroService.calculaValor(TipoContaENUM.DESPESA));
-        modelAndView.addObject("totalSaldo", registroService.calculaValor(TipoContaENUM.RECEITA) - registroService.calculaValor(TipoContaENUM.DESPESA));
+        modelAndView.addObject("totalReceita", String.format("%.2f", registroService.calculaValor(TipoContaENUM.RECEITA)));
+        modelAndView.addObject("totalDespesa", String.format("%.2f", registroService.calculaValor(TipoContaENUM.DESPESA)));
+        modelAndView.addObject("totalSaldo", String.format("%.2f", registroService.calculaValor(TipoContaENUM.RECEITA) - registroService.calculaValor(TipoContaENUM.DESPESA)));
         modelAndView.addObject("registers", registroService.findAllTop());
         return modelAndView;
     }
