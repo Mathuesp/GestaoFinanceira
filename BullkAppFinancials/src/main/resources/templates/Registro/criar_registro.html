@@ -103,6 +103,7 @@
                         <label for="tipoConta" class="form-label">Tipo Conta</label>
                         <select class="form-select" id="tipoConta" name="tipoConta" required>
                             <option th:each="type : ${tipoContas}"
+                                    th:selected="${type eq registro.tipoConta}"
                                     th:value="${type}"
                                     th:text="${type}"></option>
                         </select>
@@ -120,6 +121,7 @@
                         <label for="categoria" class="form-label">Categoria</label>
                         <select class="form-select" id="categoria" name="categoria" required>
                             <option th:each="type : ${categorias}"
+                                    th:selected="${type.id eq registro.categoria?.id}"
                                     th:value="${type.id}"
                                     th:text="${type.getDescricao()}"></option>
                         </select>
@@ -128,6 +130,7 @@
                         <label for="tipoAcerto" class="form-label">Tipo Acerto</label>
                         <select class="form-select" id="tipoAcerto" name="tipoAcerto" required>
                             <option th:each="type : ${tiposAcerto}"
+                                    th:selected="${type.id eq registro.tipoAcerto?.id}"
                                     th:value="${type.id}"
                                     th:text="${type.getDescricao()}"></option>
                         </select>
@@ -136,24 +139,21 @@
                         <label for="usuario" class="form-label">Responsável</label>
                         <select class="form-select" id="usuario" name="usuario" required>
                             <option th:each="type : ${users}"
+                                    th:selected="${type.id eq registro.usuario?.id}"
                                     th:value="${type.id}"
                                     th:text="${type.getNome()}"></option>
                         </select>
                     </div>
                     <div class="col-12">
                         <button class="btn btn-success" type="submit">Enviar</button>
+                        <button type="submit"
+                                class="btn btn-danger"
+                                onclick="window.history.go(-1); return false;">Voltar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </main>
-<!--<script>-->
-    // $(document).ready(function () {
-        // $('#dataVencimento').mask('00/00/0000');
-        // $('#dataCompra').mask('00/00/0000');
-        // $('#valor').mask('R$ 000.000.000,00', { reverse: true });
-    // });
-<!--</script>-->
 </body>
 </html>
