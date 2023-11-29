@@ -20,4 +20,6 @@ public class Categoria {
     @Size(max = 40)
     @NonNull
     private String descricao;
+    @NonNull
+    private boolean status;
 }

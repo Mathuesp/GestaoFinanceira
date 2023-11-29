@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +55,20 @@ public class RegistroService {
 
     public void delete(Long id) throws Exception {
         registroRepository.delete(findById(id));
+    }
+
+    public List<String> validate(Registro registro) {
+        List<String> msg = new ArrayList<>();
+
+        if (!registro.getCategoria().isStatus())
+            msg.add("Não é possível efetuar um registro com um Categoria inativa!");
+
+        if (!registro.getUsuario().isStatus())
+            msg.add("Não é possível efetuar um registro com um Usuário inativo!");
+
+        if (!registro.getTipoAcerto().isStatus())
+            msg.add("Não é possível efetuar um registro com um Tipo de Acerto inativo!");
+
+        return msg;
     }
 }

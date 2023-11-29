@@ -16,7 +16,7 @@ public class TipoAcertoService {
     private TipoAcertoRepository tipoAcertoRepository;
 
     public List<TipoAcerto> findAll() {
-        return tipoAcertoRepository.findAll();
+        return tipoAcertoRepository.findByOrderByIdDesc();
     }
 
     public TipoAcerto findById(Long id) throws Exception {
@@ -27,7 +27,11 @@ public class TipoAcertoService {
     }
 
     public void delete(Long id) throws Exception {
-        tipoAcertoRepository.delete(findById(id));
+        TipoAcerto tipoAcerto = findById(id);
+        tipoAcerto.setStatus(!tipoAcerto.isStatus());
+
+        tipoAcertoRepository.saveAndFlush(tipoAcerto);
+//        tipoAcertoRepository.delete(findById(id));
     }
 
     public void insert(TipoAcerto tipoAcerto) {

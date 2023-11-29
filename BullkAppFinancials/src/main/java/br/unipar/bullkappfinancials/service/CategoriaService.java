@@ -16,7 +16,7 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     public List<Categoria> findAll() {
-        return categoriaRepository.findAll();
+        return categoriaRepository.findByOrderByIdDesc();
     }
 
     public Categoria findById(Long id) throws Exception {
@@ -27,7 +27,11 @@ public class CategoriaService {
     }
 
     public void delete(Long id) throws Exception {
-        categoriaRepository.delete(findById(id));
+        Categoria categoria = findById(id);
+        categoria.setStatus(!categoria.isStatus());
+
+        categoriaRepository.saveAndFlush(categoria);
+//        categoriaRepository.delete(findById(id));
     }
 
     public void insert(Categoria categoria) {

@@ -2,6 +2,7 @@ package br.unipar.bullkappfinancials.repository;
 
 import br.unipar.bullkappfinancials.model.Categoria;
 import br.unipar.bullkappfinancials.model.TipoAcerto;
+import br.unipar.bullkappfinancials.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -14,4 +15,7 @@ import java.util.List;
 public interface TipoAcertoRepository extends JpaRepository<TipoAcerto, Long> {
     @Query
     public List<TipoAcerto> findByDescricao(String descricao);
+
+    @Query
+    public List<TipoAcerto> findByOrderByIdDesc();
 }

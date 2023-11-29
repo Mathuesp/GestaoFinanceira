@@ -93,9 +93,10 @@ public class RegistroController {
     public String insertRegistro(@Valid Registro registro,
                                        BindingResult bindingResult,
                                        RedirectAttributes redirectAttributes) {
-        List<String> msg = new ArrayList<>();
 
-        if (bindingResult.hasErrors()) {
+        List<String> msg = new ArrayList<>(registroService.validate(registro));
+
+        if (bindingResult.hasErrors() || !msg.isEmpty()) {
             redirectAttributes.addFlashAttribute("registro", registro);
 
             for (ObjectError objectError: bindingResult.getAllErrors()) {

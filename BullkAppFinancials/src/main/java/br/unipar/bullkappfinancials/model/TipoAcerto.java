@@ -20,5 +20,6 @@ public class TipoAcerto {
     @NonNull
     @Size(max = 40)
     private String descricao;
-
+    @NonNull
+    private boolean status;
 }

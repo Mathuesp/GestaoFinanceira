@@ -20,4 +20,6 @@ public class Usuario {
     @NonNull
     @Size(max = 40)
     private String nome;
+    @NonNull
+    private boolean status;
 }

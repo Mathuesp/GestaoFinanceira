@@ -14,4 +14,7 @@ import java.util.List;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query
     public List<Usuario> findByNome(String nome);
+
+    @Query
+    public List<Usuario> findByOrderByIdDesc();
 }
