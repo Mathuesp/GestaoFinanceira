@@ -2,16 +2,38 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Usuário</title>
+    <title>BullkApp Financials - Usuário</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous" defer></script>
-    <link rel="stylesheet" type="text/css" href="main.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <style>
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #133b7f !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #133b7f !important;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -31,7 +53,7 @@
                             Cadastros
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/usuario">Usuario</a></li>
+                            <li><a class="dropdown-item" href="/usuario">Usuário</a></li>
                             <li><a class="dropdown-item" href="/tipo_acerto">Tipo Acerto</a></li>
                             <li><a class="dropdown-item" href="/categoria">Categoria</a></li>
                             <li><a class="dropdown-item" href="/registro">Registro</a></li>
@@ -46,8 +68,8 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row" th:if="${not #lists.isEmpty(msg)}">
-                <div th:each = "m : ${msg}">
-                    <div class="alert alert-warning" role="alert" th:text = "${m}">
+                <div th:each="m : ${msg}">
+                    <div class="alert alert-warning" role="alert" th:text="${m}">
                         A simple warning alert—check it out!
                     </div>
                 </div>
@@ -81,16 +103,22 @@
                                th:value="${usuario.nome}"
                                required>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 mt-3">
                         <button class="btn btn-success" type="submit">Enviar</button>
-                        <button type="submit"
-                                class="btn btn-danger"
-                                onclick="window.history.go(-1); return false;">Voltar</button>
+                        <a class="btn btn-danger" onclick="history.back(); return false;">Voltar</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </main>
+<script>
+    $(document).ready(function () {
+        $('#id').mask('0000');
+    });
+</script>
+<footer>
+    © 2023 BullkApp Financials
+</footer>
 </body>
 </html>

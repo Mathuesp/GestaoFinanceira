@@ -10,6 +10,66 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous" defer></script>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            font-size: 14px;
+            width: 100%;
+            max-height: 300px; /* Defina a altura máxima desejada */
+            overflow-y: auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-novo {
+            border-radius: 10px;
+            margin-top:    10px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            border-radius: 10px;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #133b7f !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #133b7f !important;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -45,10 +105,10 @@
         <div class="container">
             <div class="row">
                 <div>
-                    <a class="btn btn-primary" href="tipo_acerto/novo_tipo_acerto" role="button">Novo Tipo Acerto</a>
+                    <a class="btn btn-primary btn-novo" href="tipo_acerto/novo_tipo_acerto" role="button">Novo Tipo Acerto</a>
                 </div>
                 <div>
-                    <table>
+                    <table class="table">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -78,5 +138,8 @@
         </div>
     </div>
 </main>
+<footer>
+    © 2023 BullkApp Financials
+</footer>
 </body>
 </html>

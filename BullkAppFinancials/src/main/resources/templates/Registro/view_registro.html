@@ -10,9 +10,70 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous" defer></script>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            font-size: 14px;
+            width: 100%;
+            max-height: 300px; /* Defina a altura máxima desejada */
+            overflow-y: auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-novo {
+            border-radius: 10px;
+            margin-top:    10px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            border-radius: 10px;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #133b7f !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #133b7f !important;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <header>
+    <!-- Navbar comum -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">BullkApp Financials</a>
@@ -45,10 +106,10 @@
         <div class="container">
             <div class="row">
                 <div>
-                    <a class="btn btn-primary" href="registro/novo_registro" role="button">Novo Registro</a>
+                    <a class="btn btn-primary btn-novo" href="registro/novo_registro" role="button">Novo Registro</a>
                 </div>
                 <div>
-                    <table>
+                    <table class="table">
                         <thead>
                         <tr>
                             <th>Data Compra</th>
@@ -66,8 +127,8 @@
                         </thead>
                         <tbody>
                         <tr th:each="register : ${registers}">
-                            <td th:text="${register.getDataCompra()}"></td>
-                            <td th:text="${register.getDataVencimento()}"></td>
+                            <td th:text="${#temporals.format(register.getDataCompra(), 'dd/MM/yyyy')}"></td>
+                            <td th:text="${#temporals.format(register.getDataVencimento(), 'dd/MM/yyyy')}"></td>
                             <td th:text="${register.getDescricao()}"></td>
                             <td th:text="${register.getParcela()}"></td>
                             <td th:text="${register.getTipoConta()}"></td>
@@ -88,5 +149,8 @@
         </div>
     </div>
 </main>
+<footer>
+    © 2023 BullkApp Financials
+</footer>
 </body>
 </html>
