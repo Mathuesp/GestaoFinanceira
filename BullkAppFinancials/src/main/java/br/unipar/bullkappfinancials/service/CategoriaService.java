@@ -6,6 +6,7 @@ import br.unipar.bullkappfinancials.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,10 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     public List<Categoria> findAll() {
-        return categoriaRepository.findByOrderByIdDesc();
+        List<Categoria> categorias = categoriaRepository.findByOrderByIdDesc();
+        if (categorias.isEmpty())
+            return new ArrayList<>();
+        return categorias;
     }
 
     public Categoria findById(Long id) throws Exception {

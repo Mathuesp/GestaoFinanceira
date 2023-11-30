@@ -25,7 +25,12 @@ public class RegistroService {
         List<Registro> registrosRetorno = new ArrayList<>();
         List<Registro> registros = registroRepository.findByOrderByDataCompraDesc();
 
-        for (int i = 0; i < 10; i++) {
+        if (registros.isEmpty())
+            return new ArrayList<>();
+
+        int tamanho = Math.min(registros.size(), 10);
+
+        for (int i = 0; i < tamanho; i++) {
             registrosRetorno.add(registros.get(i));
         }
 

@@ -6,6 +6,7 @@ import br.unipar.bullkappfinancials.repository.TipoAcertoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,10 @@ public class TipoAcertoService {
     private TipoAcertoRepository tipoAcertoRepository;
 
     public List<TipoAcerto> findAll() {
-        return tipoAcertoRepository.findByOrderByIdDesc();
+        List<TipoAcerto> tipoAcertos = tipoAcertoRepository.findByOrderByIdDesc();
+        if (tipoAcertos.isEmpty())
+            return new ArrayList<>();
+        return tipoAcertos;
     }
 
     public TipoAcerto findById(Long id) throws Exception {

@@ -16,7 +16,10 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public List<Usuario> findAll() {
-        return usuarioRepository.findByOrderByIdDesc();
+        List<Usuario> usuarios = usuarioRepository.findByOrderByIdDesc();
+        if (usuarios.isEmpty())
+            return new ArrayList<>();
+        return usuarios;
     }
 
     public Usuario findById(Long id) throws Exception {
